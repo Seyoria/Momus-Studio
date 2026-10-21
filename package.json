@@ -1,0 +1,68 @@
+{
+  "name": "momus-studio",
+  "version": "1.1.0",
+  "description": "Momus Studio - Windows Dynamic Island / Notch Widget",
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build": "electron-builder",
+    "dist": "electron-builder --win --publish never",
+    "release": "electron-builder --win --publish always"
+  },
+  "keywords": [
+    "notch",
+    "dynamic-island",
+    "windows",
+    "widget"
+  ],
+  "author": "Momus Studio",
+  "license": "MIT",
+  "type": "commonjs",
+  "devDependencies": {
+    "electron": "^36.3.1",
+    "electron-builder": "^26.15.3",
+    "png-to-ico": "^3.0.2"
+  },
+  "dependencies": {
+    "electron-updater": "^6.8.9",
+    "loudness": "^0.4.2",
+    "systeminformation": "^5.33.15"
+  },
+  "build": {
+    "appId": "com.momus.studio",
+    "productName": "Momus Studio",
+    "directories": {
+      "output": "dist"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "dir",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Momus Studio"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "Seyoria",
+      "repo": "Momus-Studio"
+    }
+  }
+}

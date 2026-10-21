@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Momus Studio Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800&family=Space+Grotesk:wght@500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <div class="dash-layout">
+    <!-- Sidebar -->
+    <aside class="dash-sidebar">
+      <div class="sidebar-brand">
+        <span class="brand-text">momus</span>
+        <span class="brand-tag">STUDIO</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-tab="notch">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 3v4a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V3"/></svg>
+          <span>Çentik & Pil</span>
+        </button>
+        <button class="nav-item" data-tab="sound">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+          <span>Ses & Medya</span>
+        </button>
+        <button class="nav-item" data-tab="appearance">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+          <span>Arayüz & Stil</span>
+        </button>
+        <button class="nav-item" data-tab="shortcuts">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M8 12h.01M12 12h.01M16 12h.01M7 16h10"/></svg>
+          <span>Kısayollar & Tuşlar</span>
+        </button>
+        <button class="nav-item" data-tab="spotlight">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <span>Spotlight Arama</span>
+        </button>
+        <button class="nav-item" data-tab="notifications">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span>Bildirim & HUD</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="status-pill-badge">
+          <span class="pulse-green"></span>
+          <span>Sistem Aktif</span>
+        </div>
+        <button id="sidebar-update-btn" class="dash-btn" style="width:100%; margin-top:8px; font-size:11px; padding:6px 10px; display:flex; align-items:center; justify-content:center; gap:6px; cursor:pointer; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:8px;">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span id="sidebar-update-text">v1.1.0 • Güncellemeleri Denetle</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="dash-content">
+      <!-- Top Bar -->
+      <header class="content-header">
+        <div>
+          <h1 class="header-heading" id="tab-heading">Masaüstü Kontrol Masası</h1>
+          <p class="header-sub" id="tab-sub">Momus Dynamic Island ve çentik ayarları anlık senkronize edilir</p>
+        </div>
+
+        <div class="header-actions">
+          <button id="btn-toggle-notch" class="btn-primary">
+            Çentik Modunu Değiştir (Alt+M)
+          </button>
+          <button id="btn-reset-all" class="btn-outline">
+            Sıfırla
+          </button>
+        </div>
+      </header>
+
+      <!-- TAB 1: NOTCH & PIL -->
+      <div id="tab-content-notch" class="cards-grid tab-pane active">
+        <!-- Live Preview Card -->
+        <section class="card preview-card">
+          <div class="card-header">
+            <span class="card-title">Canlı Durum & Mod Seçimi</span>
+            <span class="card-badge">CANLI ÖNİZLEME</span>
+          </div>
+
+          <div class="preview-mode-switch">
+            <button class="mode-btn" id="mode-pill-btn">
+              <span class="dot-green"></span>
+              <span>Küçük Pil Modu</span>
+            </button>
+            <button class="mode-btn active" id="mode-expanded-btn">
+              <span>Genişletilmiş Çentik</span>
+            </button>
+          </div>
+
+          <div class="live-visual-box">
+            <div class="sim-screen">
+              <div class="sim-notch" id="sim-notch">
+                <span class="sim-dot"></span>
+                <span class="sim-brand">momus</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Position & Size Card -->
+        <section class="card">
+          <div class="card-header">
+            <span class="card-title">Konumlandırma & Boyutlar</span>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-label">
+              <span>Çentik Genişliği</span>
+              <span class="val-mono" id="val-width">460px</span>
+            </div>
+            <input type="range" id="cfg-width" min="320" max="700" step="10" value="460">
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-label">
+              <span>Genişletilmiş Yükseklik</span>
+              <span class="val-mono" id="val-height">200px</span>
+            </div>
+            <input type="range" id="cfg-height" min="140" max="280" step="5" value="200">
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-label">
+              <span>Üstten Boşluk (Y Kaydırma)</span>
+              <span class="val-mono" id="val-y">12px</span>
+            </div>
+            <input type="range" id="cfg-y" min="0" max="80" step="2" value="12">
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-label">
+              <span>Yatay Hizalama (X Kaydırma)</span>
+              <span class="val-mono" id="val-x">0px</span>
+            </div>
+            <input type="range" id="cfg-x" min="-300" max="300" step="5" value="0">
+          </div>
+        </section>
+
+        <!-- Pill Specifications Card -->
+        <section class="card">
+          <div class="card-header">
+            <span class="card-title">Küçük Pil Ayarları</span>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-label">
+              <span>Pil Genişliği</span>
+              <span class="val-mono" id="val-pill-w">170px</span>
+            </div>
+            <input type="range" id="cfg-pill-w" min="120" max="240" step="5" value="170">
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-label">
+              <span>Pil Yüksekliği</span>
+              <span class="val-mono" id="val-pill-h">38px</span>
+            </div>
+            <input type="range" id="cfg-pill-h" min="30" max="50" step="2" value="38">
+          </div>
+        </section>
+
+        <!-- Content & Customization -->
+        <section class="card">
+          <div class="card-header">
+            <span class="card-title">Metin & Başlık</span>
+          </div>
+
+          <div class="input-block">
+            <label for="cfg-title">Başlık (Sol Taraf)</label>
+            <input type="text" id="cfg-title" value="momus">
+          </div>
+
+          <div class="input-block">
+            <label for="cfg-status">Alt Durum Etiketi</label>
+            <input type="text" id="cfg-status" value="Aktif">
+          </div>
+        </section>
+
+        <!-- Sistem & Otomatik Başlatma -->
+        <section class="card">
+          <div class="card-header">
+            <span class="card-title">Sistem & Otomatik Başlatma</span>
+            <span class="card-badge" style="color:#22c55e; border-color:#22c55e;">WINDOWS</span>
+          </div>
+          <p style="font-size:12px; color:var(--text-secondary); line-height:1.5; margin-bottom:14px;">
+            Bilgisayarınız her açıldığında Momus Dynamic Island otomatik olarak ekranınızın üstünde hazır başlar.
+          </p>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.03); padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.06);">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div style="width:34px; height:34px; border-radius:9px; background:rgba(34,197,94,0.15); display:flex; align-items:center; justify-content:center; color:#22c55e;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+              </div>
+              <div>
+                <strong style="color:#fff; font-size:13px; display:block;">Windows ile Otomatik Başlat</strong>
+                <span style="font-size:11px; color:var(--text-secondary);">PC açılışında arka planda çentiği yükler</span>
+              </div>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="cfg-autolaunch">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </section>
+
+        <!-- Sürüm & Otomatik Güncelleme (Ana Sekme) -->
+        <section class="card">
+          <div class="card-header">
+            <span class="card-title">Yazılım Güncellemesi & Sürüm</span>
+            <span class="card-badge" style="color:#60a5fa; border-color:#60a5fa;">v1.1.0</span>
+          </div>
+          <p style="font-size:12px; color:var(--text-secondary); line-height:1.5; margin-bottom:12px;">
+            Momus Studio GitHub Releases (<strong style="color:#fff;">Seyoria/Momus-Studio</strong>) üzerinden otomatik güncellemeleri denetler. Yeni sürüm yayınlandığında çentikte anında bildirim alırsınız.
+          </p>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.03); padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.06); gap:12px; flex-wrap:wrap;">
+            <div>
+              <div style="font-weight:600; font-size:13px; color:#fff;">Momus Studio v1.1.0 (Güncel)</div>
+              <div id="update-status-text" style="font-size:11px; color:var(--text-secondary); margin-top:2px;">Kanal: GitHub Releases (Seyoria/Momus-Studio)</div>
+            </div>
+            <button id="btn-check-update" class="dash-btn" style="padding:7px 18px; font-weight:600;">Güncellemeleri Denetle</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- TAB 2: SOUND & MEDIA (SES & MEDYA) -->
+      <div id="tab-content-sound" class="cards-grid tab-pane" style="display:none;">
+        <section class="card">
+          <div class="card-header">
+            <span class="card-title">Spotify & Medya Kontrolleri</span>
+            <span class="card-badge" style="color:#1db954; border-color:#1db954;">SPOTIFY HAZIR</span>
+          </div>
+          <p style="font-size:13px; color:var(--text-secondary); line-height:1.5;">
+            Spotify açık olduğunda çalan şarkı adı, sanatçısı ve albüm kapağı otomatik olarak Momus çentiğinde ve pilinde canlı olarak görüntülenir.
+          </p>
+
+          <div class="media-preview-box">
+            <div class="now-playing-wrap">
+              <img id="dash-cover-art" src="../../assets/icon.png" alt="Cover" class="dash-cover-art">
+              <div class="now-playing-info">
+                <span class="np-title" id="dash-np-title">Spotify bekleniyor...</span>
+                <span class="np-artist" id="dash-np-artist">Şarkı açtığınızda otomatik bağlanacak</span>
+              </div>
+            </div>
+
+            <div class="dash-media-actions">
+              <button class="dash-btn" id="dash-btn-prev">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5" stroke="currentColor" stroke-width="2.5"/></svg>
+                <span>Önceki</span>
+              </button>
+              <button class="dash-btn dash-btn-p" id="dash-btn-play">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <span>Oynat / Duraklat</span>
+              </button>
+              <button class="dash-btn" id="dash-btn-next">
+                <span>Sonraki</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2.5"/></svg>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <span class="card-title">Sistem Ses Seviyesi</span>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-label">
+              <span>Masaüstü Ses Seviyesi</span>
+              <span class="val-mono" id="dash-vol-label">50%</span>
+            </div>
+            <input type="range" id="dash-vol-slider" min="0" max="100" value="50">
+          </div>
+        </section>
+      </div>
+
+      <!-- TAB 3: APPEARANCE (ARAYÜZ & STİL) -->
+      <div id="tab-content-appearance" class="cards-grid tab-pane" style="display:none;">
+        <section class="card">
+          <div class="card-header">
+            <span class="card-title">Stil & Kenarlık</span>
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-label">
+              <span>Köşe Yuvarlaklığı (Radius)</span>
+              <span class="val-mono" id="val-radius">22px</span>
+            </div>
+            <input type="range" id="cfg-radius" min="8" max="40" step="2" value="22">
+          </div>
+
+          <div class="setting-row">
+            <div class="setting-label">
+              <span>Opaklık (Saydamlık)</span>
+              <span class="val-mono" id="val-opacity">98%</span>
+            </div>
+            <input type="range" id="cfg-opacity" min="50" max="100" step="1" value="98">
+          </div>
+        </section>
+
+        <!-- Glass Effect & Blur Depth -->
+        <section class="card">
+          <div class="card-header">
+            <span class="card-title">Buzlu Cam & Efekt Derinliği</span>
+            <span class="card-badge" style="color:#a855f7; border-color:#a855f7;">AEROGLASS</span>
+          </div>
+          <p style="font-size:12px; color:var(--text-secondary); line-height:1.5; margin-bottom:12px;">
+            Momus Dynamic Island arkasında kalan pencereler için Apple tipi canlı akrilik bulanıklık yoğunluğunu ayarlar.
+          </p>
+
+          <div class="setting-row">
+            <div class="setting-label">
+              <span>Cam Bulanıklığı (Backdrop Blur)</span>
+              <span class="val-mono" id="val-blur">24px</span>
+            </div>
+            <input type="range" id="cfg-blur" min="8" max="48" step="2" value="24">
+          </div>
+
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 12px; background:rgba(255,255,255,0.03); border-radius:10px; margin-top:8px;">
+            <div>
+              <strong style="color:#fff; font-size:12px; display:block;">Pürüzsüz Kenar Işığı (Rim Glow)</strong>
+              <span style="font-size:11px; color:var(--text-secondary);">Üst kenarda hafif neon ışıma çizgisi</span>
+            </div>
+            <span style="color:#22c55e; font-size:11px; font-weight:700;">Açık</span>
+          </div>
+        </section>
+      </div>
+
+      <!-- TAB 4: SHORTCUTS (KISAYOLLAR & TUŞLAR) -->
+      <div id="tab-content-shortcuts" class="cards-grid tab-pane" style="display:none;">
+        <section class="card">
+          <div class="card-header">
+            <span class="card-title">Sistem Kısayolları</span>
+            <span class="card-badge" style="color:#a855f7; border-color:#a855f7;">AKTİF</span>
+          </div>
+
+          <div class="shortcut-list-box" style="display:flex; flex-direction:column; gap:12px;">
+            <div class="shortcut-item" style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:rgba(255,255,255,0.04); border-radius:10px; border:1px solid rgba(255,255,255,0.07);">
+              <div>
+                <strong style="color:#fff; display:block; font-size:13px;">Çentik Boyutunu Değiştir</strong>
+                <span style="font-size:11px; color:var(--text-secondary);">Küçük pil ile genişletilmiş çentik arasında geçiş yapar</span>
+              </div>
+              <kbd style="background:#181822; border:1px solid rgba(255,255,255,0.15); padding:4px 10px; border-radius:6px; font-family:'DM Mono', monospace; font-size:12px; color:#fff;">Alt + M</kbd>
+            </div>
+
+            <div class="shortcut-item" style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:rgba(255,255,255,0.04); border-radius:10px; border:1px solid rgba(255,255,255,0.07);">
+              <div>
+                <strong style="color:#fff; display:block; font-size:13px;">Çentiği Tamamen Yok Et (Gizle / Göster)</strong>
+                <span style="font-size:11px; color:var(--text-secondary);">Pil modundan da çıkar, ekrandan tamamen kaybolur</span>
+              </div>
+              <kbd style="background:#181822; border:1px solid rgba(255,255,255,0.15); padding:4px 10px; border-radius:6px; font-family:'DM Mono', monospace; font-size:12px; color:#a855f7;">Ctrl + Shift + M</kbd>
+            </div>
+
+            <div class="shortcut-item" style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:rgba(255,255,255,0.04); border-radius:10px; border:1px solid rgba(255,255,255,0.07);">
+              <div>
+                <strong style="color:#fff; display:block; font-size:13px;">Spotlight Komut Arama</strong>
+                <span style="font-size:11px; color:var(--text-secondary);">Hızlı hesaplama ve web araması için arama çubuğunu açar</span>
+              </div>
+              <kbd style="background:#181822; border:1px solid rgba(255,255,255,0.15); padding:4px 10px; border-radius:6px; font-family:'DM Mono', monospace; font-size:12px; color:#38bdf8;">Alt + Space</kbd>
+            </div>
+
+            <div class="shortcut-item" style="display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:rgba(255,255,255,0.04); border-radius:10px; border:1px solid rgba(255,255,255,0.07);">
+              <div>
+                <strong style="color:#fff; display:block; font-size:13px;">Pencereyi Kapat / Pile Küçült</strong>
+                <span style="font-size:11px; color:var(--text-secondary);">Geniş çentiği veya Spotlight'ı pile döndürür</span>
+              </div>
+              <kbd style="background:#181822; border:1px solid rgba(255,255,255,0.15); padding:4px 10px; border-radius:6px; font-family:'DM Mono', monospace; font-size:12px; color:#fff;">Esc</kbd>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <span class="card-title">Hızlı Test Eylemleri</span>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <button id="btn-test-hide" class="btn-outline" style="flex:1;">Çentiği Gizle (Ctrl+Shift+M)</button>
+            <button id="btn-test-spotlight" class="btn-primary" style="flex:1;">Spotlight'ı Aç (Alt+Space)</button>
+          </div>
+        </section>
+      </div>
+
+      <!-- TAB 5: SPOTLIGHT (SPOTLIGHT ARAMA) -->
+      <div id="tab-content-spotlight" class="cards-grid tab-pane" style="display:none;">
+        <section class="card">
+          <div class="card-header">
+            <span class="card-title">Spotlight Arama Özellikleri</span>
+            <span class="card-badge" style="color:#38bdf8; border-color:#38bdf8;">macOS Tarzı</span>
+          </div>
+          <p style="font-size:13px; color:var(--text-secondary); line-height:1.6;">
+            <strong>Alt + Space</strong> kısayoluyla istediğiniz anda çalışan minimalist bir komut çubuğudur.
+          </p>
+
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:14px;">
+            <div style="padding:14px; background:rgba(255,255,255,0.03); border-radius:12px; border:1px solid rgba(255,255,255,0.06); display:flex; gap:12px; align-items:flex-start;">
+              <div style="width:32px; height:32px; border-radius:8px; background:rgba(34,197,94,0.12); border:1px solid rgba(34,197,94,0.3); display:flex; align-items:center; justify-content:center; color:#22c55e; flex-shrink:0;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <div>
+                <span style="color:#22c55e; font-weight:700; font-size:13px; display:block;">Canlı Matematik Hesaplama</span>
+                <p style="font-size:12px; color:var(--text-secondary); margin-top:3px; line-height:1.5;">
+                  <code>45 * 12</code>, <code>1500 / 4</code> veya <code>250 + 75</code> yazdığınızda anında sonucu görür ve Enter ile panoya kopyalayabilirsiniz.
+                </p>
+              </div>
+            </div>
+
+            <div style="padding:14px; background:rgba(255,255,255,0.03); border-radius:12px; border:1px solid rgba(255,255,255,0.06); display:flex; gap:12px; align-items:flex-start;">
+              <div style="width:32px; height:32px; border-radius:8px; background:rgba(56,189,248,0.12); border:1px solid rgba(56,189,248,0.3); display:flex; align-items:center; justify-content:center; color:#38bdf8; flex-shrink:0;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </div>
+              <div>
+                <span style="color:#38bdf8; font-weight:700; font-size:13px; display:block;">Akıllı Web & URL Yönlendirme</span>
+                <p style="font-size:12px; color:var(--text-secondary); margin-top:3px; line-height:1.5;">
+                  Herhangi bir kelime girdiğinizde varsayılan tarayıcınızda Google aramasını, <code>github.com</code> gibi adreslerde ise direkt siteyi açar.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-header">
+            <span class="card-title">Arama Motoru Tercihi</span>
+            <span class="card-badge" style="color:#38bdf8; border-color:#38bdf8;">OTOMATİK TESPİT</span>
+          </div>
+          <p style="font-size:12px; color:var(--text-secondary); line-height:1.5; margin-bottom:12px;">
+            Sisteminizdeki yüklü tarayıcılar algılandı. Spotlight (Alt+Space) üzerinden arama yaptığınızda kullanılacak motoru seçebilirsiniz:
+          </p>
+
+          <!-- Yüklü Tarayıcılar Badge Listesi -->
+          <div id="detected-browsers-list" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px;">
+            <!-- Dinamik olarak yüklü tarayıcılar listelenecek -->
+          </div>
+
+          <div class="engine-buttons-grid" id="engine-buttons-grid" style="display:flex; gap:10px; margin-top:4px;">
+            <button class="dash-btn engine-btn active" data-engine="google" style="flex:1;">Google</button>
+            <button class="dash-btn engine-btn" data-engine="duckduckgo" style="flex:1;">DuckDuckGo</button>
+            <button class="dash-btn engine-btn" data-engine="bing" style="flex:1;">Bing</button>
+            <button class="dash-btn engine-btn" data-engine="brave" style="flex:1;">Brave</button>
+            <button class="dash-btn engine-btn" data-engine="yandex" style="flex:1;">Yandex</button>
+          </div>
+        </section>
+      </div>
+
+
+
+      <!-- TAB 7: NOTIFICATIONS (BILDIRIM & HUD) -->
+      <div id="tab-content-notifications" class="cards-grid tab-pane" style="display:none;">
+        <section class="card">
+          <div class="card-header">
+            <span class="card-title">Sistem & Pil HUD Bildirimleri</span>
+          </div>
+          <p style="font-size:13px; color:var(--text-secondary); line-height:1.6;">
+            Uyarılar hem buyuk centik modunda hem de <strong>kucuk pil modunda</strong> anlik olarak hapin icinde süzülerek gosterilir.
+          </p>
+
+          <div style="display:flex; flex-direction:column; gap:10px; margin-top:14px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:rgba(255,255,255,0.03); border-radius:10px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/><rect x="4" y="19" width="16" height="2"/></svg>
+                <div>
+                  <strong style="color:#fff; font-size:13px; display:block;">Caps Lock Uyarisi</strong>
+                  <span style="font-size:11px; color:var(--text-secondary);">Tusa basildiginda kucuk pil icinde 'CAPS ACIK' yazar</span>
+                </div>
+              </div>
+              <span style="color:#22c55e; font-size:12px; font-weight:700;">Aktif</span>
+            </div>
+
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:rgba(255,255,255,0.03); border-radius:10px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                <div>
+                  <strong style="color:#fff; font-size:13px; display:block;">MagSafe Sarj Animasyonu</strong>
+                  <span style="font-size:11px; color:var(--text-secondary);">Sarj takildiginda yesil halka ve yuzde gostergesi</span>
+                </div>
+              </div>
+              <span style="color:#22c55e; font-size:12px; font-weight:700;">Aktif</span>
+            </div>
+
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:rgba(255,255,255,0.03); border-radius:10px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                <div>
+                  <strong style="color:#fff; font-size:13px; display:block;">Ses Seviyesi Degisim HUD</strong>
+                  <span style="font-size:11px; color:var(--text-secondary);">Kullanici tercihi uzerine devre disi birakildi</span>
+                </div>
+              </div>
+              <span style="color:#ef4444; font-size:12px; font-weight:700;">Kapali</span>
+            </div>
+
+            <!-- Yeni Türetilen Bildirim Seçenekleri -->
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:rgba(255,255,255,0.03); border-radius:10px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="m8 12 4 4 4-4"/></svg>
+                <div>
+                  <strong style="color:#fff; font-size:13px; display:block;">AirDrop Dosya Bırakma Rozeti</strong>
+                  <span style="font-size:11px; color:var(--text-secondary);">Dosya çentiğe sürüklendiğinde mor radar animasyonu</span>
+                </div>
+              </div>
+              <span style="color:#22c55e; font-size:12px; font-weight:700;">Aktif</span>
+            </div>
+
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:rgba(255,255,255,0.03); border-radius:10px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                <div>
+                  <strong style="color:#fff; font-size:13px; display:block;">Apple Odak Modu (DND) Durumu</strong>
+                  <span style="font-size:11px; color:var(--text-secondary);">Rahatsız etmeyin açıkken hap içinde mor hilal rozeti</span>
+                </div>
+              </div>
+              <span style="color:#22c55e; font-size:12px; font-weight:700;">Aktif</span>
+            </div>
+
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:rgba(255,255,255,0.03); border-radius:10px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/></svg>
+                <div>
+                  <strong style="color:#fff; font-size:13px; display:block;">Kritik Düşük Pil Uyarısı</strong>
+                  <span style="font-size:11px; color:var(--text-secondary);">Pil %20'nin altına indiğinde ada üzerinde akıllı ikaz</span>
+                </div>
+              </div>
+              <span style="color:#22c55e; font-size:12px; font-weight:700;">Aktif</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Sürüm & Otomatik Güncelleme -->
+        <section class="card">
+          <div class="card-header">
+            <span class="card-title">Yazılım Güncellemesi & Sürüm</span>
+          </div>
+          <p style="font-size:12px; color:var(--text-secondary); line-height:1.5; margin-bottom:12px;">
+            Momus Studio GitHub Releases üzerinden otomatik güncellemeleri denetler. Yeni sürüm yayınlandığında çentikte bildirim alırsınız.
+          </p>
+          <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.03); padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.06); gap:12px; flex-wrap:wrap;">
+            <div>
+              <div style="font-weight:600; font-size:13px; color:#fff;">Momus Studio v1.1.0</div>
+              <div id="update-status-text" style="font-size:11px; color:var(--text-secondary); margin-top:2px;">Güncelleme Kanalı: GitHub Releases</div>
+            </div>
+            <button id="btn-check-update" class="dash-btn" style="padding:6px 16px;">Güncellemeleri Denetle</button>
+          </div>
+        </section>
+      </div>
+
+    </main>
+  </div>
+
+  <script src="settings.js"></script>
+</body>
+</html>
