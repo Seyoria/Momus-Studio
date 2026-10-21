@@ -13,23 +13,23 @@
 
 ---
 
-## ✨ Öne Çıkan Özellikler (v1.1.0)
+##  Öne Çıkan Özellikler (v1.1.0)
 
-- 🏝️ **Apple Dynamic Island Deneyimi:** Ekranın üst kenarında akıcı animasyonlarla çalışan kompakt hap (Pill) ve genişletilmiş çentik (Expanded Notch) modları.
-- 🎵 **Spotify & YouTube Canlı Medya:**
+-  **Apple Dynamic Island Deneyimi:** Ekranın üst kenarında akıcı animasyonlarla çalışan kompakt hap (Pill) ve genişletilmiş çentik (Expanded Notch) modları.
+-  **Spotify & YouTube Canlı Medya:**
   - Anlık şarkı adı, sanatçı ve albüm kapağı senkronizasyonu.
   - Canlı parça ilerleme çubuğu ve müzik kontrolleri (Önceki / Duraklat / Sonraki).
   - YouTube sekmesine geçildiğinde dinamik kırmızı durum feneri.
-- 💡 **Dinamik Ada Temaları & Ambient Glow:** Çalan şarkının albüm kapağından baskın rengi çıkararak monitörün üst çerçevesine yayılan şık ortam aydınlatması (Ambient Backlight).
-- 🎮 **Akıllı Oyun Modu (Auto-Hide):** Tam ekran bir oyun açıldığında yerel C# dedektörüyle (`FullscreenDetector.exe`) adayı otomatik gizler, masaüstüne dönüldüğünde geri getirir.
-- 🛡️ **Mikrofon & Kamera Gizlilik Kalkanı:** Arka planda mikrofon veya kamera kullanıldığında çentikte beliren canlı yeşil ve turuncu gizlilik noktaları.
-- 🔄 **Sürükle-Bırak Hızlı Format Dönüştürücü:** Görselleri çentiğe bırakıp tek tıkla `PNG`, `JPG` veya `ICO` formatlarına dönüştürme yuvası.
-- 🔍 **Spotlight Hızlı Arama & Hesap Makinesi:** `Alt+Space` ile anında açılan, matematiksel formülleri canlı hesaplayan ve Google araması yapan Spotlight çubuğu.
-- 📝 **AirDrop Rafı & Hızlı Not:** Dosyaları geçici olarak tutabileceğiniz masaüstü rafı ve otomatik kaydedilen minimalist not defteri.
+-  **Dinamik Ada Temaları & Ambient Glow:** Çalan şarkının albüm kapağından baskın rengi çıkararak monitörün üst çerçevesine yayılan şık ortam aydınlatması (Ambient Backlight).
+-  **Akıllı Oyun Modu (Auto-Hide):** Tam ekran bir oyun açıldığında yerel C# dedektörüyle (`FullscreenDetector.exe`) adayı otomatik gizler, masaüstüne dönüldüğünde geri getirir.
+-  **Mikrofon & Kamera Gizlilik Kalkanı:** Arka planda mikrofon veya kamera kullanıldığında çentikte beliren canlı yeşil ve turuncu gizlilik noktaları.
+-  **Sürükle-Bırak Hızlı Format Dönüştürücü:** Görselleri çentiğe bırakıp tek tıkla `PNG`, `JPG` veya `ICO` formatlarına dönüştürme yuvası.
+-  **Spotlight Hızlı Arama & Hesap Makinesi:** `Alt+Space` ile anında açılan, matematiksel formülleri canlı hesaplayan ve Google araması yapan Spotlight çubuğu.
+-  **AirDrop Rafı & Hızlı Not:** Dosyaları geçici olarak tutabileceğiniz masaüstü rafı ve otomatik kaydedilen minimalist not defteri.
 
 ---
 
-## ⌨️ Klavye Kısayolları
+##  Klavye Kısayolları
 
 | Kısayol | İşlev |
 | :--- | :--- |
@@ -40,15 +40,15 @@
 
 ---
 
-## 🚀 İndirme & Kurulum
+##  İndirme & Kurulum
 
 En son derlenmiş Windows kurulum paketini [Releases](https://github.com/Seyoria/Momus-Studio/releases) sayfasından indirebilirsiniz:
 
-- 📦 **[Momus Studio Setup 1.1.0.exe](https://github.com/Seyoria/Momus-Studio/releases/download/v1.1.0/Momus.Studio.Setup.1.1.0.exe)**
+-  **[Momus Studio Setup 1.1.0.exe](https://github.com/Seyoria/Momus-Studio/releases/download/v1.1.0/Momus.Studio.Setup.1.1.0.exe)**
 
 ---
 
-## 💻 Geliştirici Kurulumu
+##  Geliştirici Kurulumu
 
 Projeyi yerel ortamda çalıştırmak veya kaynak koddan derlemek için:
 
@@ -69,6 +69,6 @@ npm run dist
 
 ---
 
-## 📄 Lisans
+##  Lisans
 
 Bu proje [MIT Lisansı](LICENSE) altında korunmaktadır. © 2026 Momus Studio / Seyoria
